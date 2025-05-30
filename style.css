@@ -155,7 +155,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     cursor: pointer;
     background: white;
     border-radius: 4px;
-    box-shadow: 0 3px 2px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
 }
 .collapse p {
     display: inline-block;
@@ -194,6 +194,10 @@ input[type=checkbox]:checked ~ .collapse ul {
 
 .collapse .details > option:hover {
     background-color: #eee;
+}
+
+.sort-option {
+    text-shadow: none;
 }
 
 .search-box {
