@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ask At University</title>
+  <link rel="icon" type="image/png" href="image/LogoTitle.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
+  integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <input type="checkbox" id="menu-toggle" hidden>
+  <label for="menu-toggle" class="menu-toggle" ><i class="fa-solid fa-bars-staggered"></i></label>
+
+  <div class="menu">
+
+    <div class="menu_header">
+        <h2>Q&A Portal</h2>
+    </div>
+
+    <div class="menu_item">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+    </div>
+
+    <div class="menu_item">
+        <i class="fa-solid fa-plus"></i>
+        <span>Add Post</span>
+    </div>
+
+    <div class="menu_item">
+        <i class="fa-solid fa-address-book"></i>
+        <span>Contact</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <div class="intro">
+    <img src="image/LogoAskUni.png.png" alt="logo of AskUni">
+    <p> a community-driven question-and-answer platform. solve college's academic problems by sharing knowledge </p>
+    </div>
+
+    <div class="container"> 
+        <div class="sort-option">
+           <input type="checkbox" id="collapse1">
+  <label class="collapse" for="collapse1">
+    <p>Filter by Module</p>
+    <div class="iconPlus">
+      <i class="fa-solid fa-sort-down"></i>
+    </div>
+    <div class="details"> 
+      <option value="1">Web Programming 1</option> 
+      <option value="2">Object Oriented Programming</option>
+      <option value="3">Systems Development</option>
+    </div>
+  </label>
+
+        </div>
+
+      <div class="sort-option">
+           <input type="checkbox" id="collapse2">
+  <label class="collapse" for="collapse2">
+    <p>Filter by Lecturer answered</p>
+    <div class="iconPlus">
+      <i class="fa-solid fa-sort-down"></i>
+    </div>
+    <div class="details"> 
+      <option value="1">Mr.Tran Thanh Truc</option> 
+      <option value="2">Dr.Pham Thanh Son</option>
+      <option value="3">Dr.Vinh</option>
+    </div>
+  </label>
+
+
+        </div>
+         <div class="search-box">
+    <input 
+    type="text"
+    class="search-txt"
+    name=""
+    placeholder="what's your problem?">
+    <a href="#" class="search-btn">
+      <i class="fa-solid fa-question"></i>
+    </a>
+   </div>
+    </div>
+  </div>
+
+
+
+</body>
+</html>
