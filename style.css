@@ -113,13 +113,18 @@ body > p {
 
 .watermark {
     margin-top: 500px;
+
+}
+
+.watermark a {
+    text-decoration: none;
 }
 
 input[type=checkbox] {
     display: none;
 }
 input[type=checkbox]:checked ~ .collapse {
-    height: 206px;
+    height: 180px;
 }
 input[type=checkbox]:checked ~ .collapse .iconPlus {
     -webkit-transform: rotate(90deg);
@@ -186,6 +191,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     color: #111111;
 }
 .collapse .details {
+    border: none;
     display: block;
     padding: 15px 0;
     color: #111111;
@@ -206,7 +212,7 @@ input[type=checkbox]:checked ~ .collapse ul {
 
 .search-box {
     margin-top: 48px;
-    width: 300px;
+    width: 500px;
     height: 45px;
     display: flex;
     background: #fff;
@@ -261,7 +267,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     text-align: left;
     color: #333;
     transition: transform 2s ease, box-shadow 0.3s ease ;
-    
+    display: inline-block;
 }
 
 .card-body:hover {
@@ -293,7 +299,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     color: #111;
 }
 
-.btn-primary :hover {
+.btn-primary:hover {
      background-color: #34D399;
 }
 
@@ -313,4 +319,19 @@ input[type=checkbox]:checked ~ .collapse ul {
 
 .btn-danger:hover {
     background-color: #8B5CF6;
+}
+
+.filter-btn {
+    background: #9D9BEF;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    margin-top: 10px;
+}
+
+.filter-btn:hover {
+  background: #357ABD;
 }
