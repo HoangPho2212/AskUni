@@ -335,3 +335,48 @@ input[type=checkbox]:checked ~ .collapse ul {
 .filter-btn:hover {
   background: #357ABD;
 }
+
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .collapse {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .search-box {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .card-body {
+    width: 90%;
+    max-width: none;
+    margin: 10px auto;
+  }
+
+  .menu {
+    width: 70%;
+  }
+
+  .menu-toggle {
+    font-size: 20px;
+    top: 15px;
+    left: 15px;
+  }
+
+  .intro img {
+    max-width: 50%;
+  }
+
+  .filter-btn {
+    width: 90%;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
