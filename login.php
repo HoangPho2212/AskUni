@@ -16,10 +16,10 @@
 
         <form action="login.php" method="POST">
             <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" placeholder="type your username" required>
 
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" placeholder="type your password" required>
 
             <button type="submit" name="login">Login</button>
             <i class="fa-solid fa-question"></i>
