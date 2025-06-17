@@ -405,7 +405,7 @@ input[type=checkbox]:checked ~ .collapse ul {
 }
 
 .login-container {
-    max-height: 600px;
+    max-height: 550px;
     max-width: 400px;
     margin: 100px auto;
     background-color: white;
@@ -476,4 +476,17 @@ input[type=checkbox]:checked ~ .collapse ul {
 
 .register-link a:hover {
     text-decoration: underline  ;
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo-wrapper img {
+  margin-top: 10px;
+  width: 120px;
+  max-width: 100%;
+  height: auto;
 }

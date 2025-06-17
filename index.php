@@ -68,18 +68,6 @@
 
                 </div>
 
-                <div class="sort-option">
-                    <label class="collapse">
-                        <p>Filter by Lecturer</p>
-                        <select class="details" name="lecturer">
-                            <option value="">All</option>
-                            <option value="Truc">Mr. Tran Thanh Truc</option>
-                            <option value="Son">Dr. Pham Thanh Son</option>
-                            <option value="Vinh">Dr. Vinh</option>
-                        </select>
-                    </label>
-                </div>
-
                 <!-- Submit Button -->
                 <button type="submit" class="filter-btn"> Apply filter
                     <i class="fa-solid fa-filter"></i>
@@ -88,7 +76,6 @@
             <div class="search-box">
                 <input type="text" class="search-txt" name="" placeholder="what's your problem?">
                 <a href="#" class="search-btn">
-                    <i class="fa-solid fa-question"></i>
                 </a>
             </div>
         </div>
