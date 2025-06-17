@@ -76,6 +76,7 @@
             <div class="search-box">
                 <input type="text" class="search-txt" name="" placeholder="what's your problem?">
                 <a href="#" class="search-btn">
+                <i class="fa-solid fa-question"></i>
                 </a>
             </div>
         </div>

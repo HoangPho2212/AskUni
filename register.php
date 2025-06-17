@@ -1,15 +1,18 @@
 <!-- register.php -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
   <title>Register | AskUni</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="image/LogoTitle.png">
 </head>
+
 <body>
 
-  <div class="login-wrapper">
+  <div class="login-container">
     <form action="register.php" method="POST" class="login-box">
       <h2 class="login-title">Create an AskUni Account</h2>
 
@@ -24,11 +27,17 @@
 
       <button type="submit" name="register">Register</button>
 
-      <p class="login-footer">
+      <p class="register-link">
         Already have an account? <a href="login.php">Login here</a>
       </p>
+
+      <div class="logo-wrapper">
+            <img src="image/LogoAskUni.png.png" alt="logo of ask uni">
+        </div>
+      
     </form>
   </div>
 
 </body>
+
 </html>

@@ -1,19 +1,19 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI',sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
     display: flex;
-    width:  100vw;
+    width: 100vw;
     height: 100vh;
-    background: 
+    background:
         linear-gradient(45deg,
-        #A78BFA,
-        #6EE7B7,
-        #E5E7EB);
+            #A78BFA,
+            #6EE7B7,
+            #E5E7EB);
 }
 
 .menu-toggle {
@@ -90,11 +90,12 @@ body {
     margin: 25px auto;
     text-align: center;
     color: #5c5b5b;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.6)
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6)
 }
+
 img {
-  max-width: 13%;
-  height: auto;
+    max-width: 13%;
+    height: auto;
 }
 
 .container {
@@ -104,7 +105,7 @@ img {
 }
 
 
-body > p {
+body>p {
     font-size: 18px;
     color: #FFF;
     text-align: center;
@@ -123,24 +124,28 @@ body > p {
 input[type=checkbox] {
     display: none;
 }
-input[type=checkbox]:checked ~ .collapse {
+
+input[type=checkbox]:checked~.collapse {
     height: 180px;
 }
-input[type=checkbox]:checked ~ .collapse .iconPlus {
+
+input[type=checkbox]:checked~.collapse .iconPlus {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
-input[type=checkbox]:checked ~ .collapse .minus {
+
+input[type=checkbox]:checked~.collapse .minus {
     -webkit-transform: rotate(90deg);
     -moz-transform: rotate(90deg);
     -ms-transform: rotate(90deg);
     -o-transform: rotate(90deg);
     transform: rotate(90deg);
 }
-input[type=checkbox]:checked ~ .collapse ul {
+
+input[type=checkbox]:checked~.collapse ul {
     opacity: 1;
 }
 
@@ -166,6 +171,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     border-radius: 4px;
     box-shadow: none;
 }
+
 .collapse p {
     display: inline-block;
     vertical-align: middle;
@@ -173,6 +179,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     color: #111111;
     font-size: 18px;
 }
+
 .collapse .iconPlus {
     -webkit-transition: 0.4s;
     -moz-transition: 0.4s;
@@ -190,6 +197,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     width: 20px;
     color: #111111;
 }
+
 .collapse .details {
     border: none;
     display: block;
@@ -198,11 +206,11 @@ input[type=checkbox]:checked ~ .collapse ul {
     font-size: 15px;
 }
 
-.collapse .details > option  {
-    padding: 15px 10px ;
+.collapse .details>option {
+    padding: 15px 10px;
 }
 
-.collapse .details > option:hover {
+.collapse .details>option:hover {
     background-color: #eee;
 }
 
@@ -250,11 +258,11 @@ input[type=checkbox]:checked ~ .collapse ul {
 }
 
 .search-btn:hover {
-  background: #357ABD;
+    background: #357ABD;
 }
 
 .search-btn i {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 .card-body {
@@ -266,7 +274,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     text-align: left;
     color: #333;
-    transition: transform 2s ease, box-shadow 0.3s ease ;
+    transition: transform 2s ease, box-shadow 0.3s ease;
     display: inline-block;
 }
 
@@ -295,12 +303,12 @@ input[type=checkbox]:checked ~ .collapse ul {
 }
 
 .btn-primary {
-    background-color: #6EE7B7 ;
+    background-color: #6EE7B7;
     color: #111;
 }
 
 .btn-primary:hover {
-     background-color: #34D399;
+    background-color: #34D399;
 }
 
 .btn-secondary {
@@ -309,7 +317,7 @@ input[type=checkbox]:checked ~ .collapse ul {
 }
 
 .btn-secondary:hover {
-    background-color: #34D399 ;
+    background-color: #34D399;
 }
 
 .btn-danger {
@@ -333,52 +341,52 @@ input[type=checkbox]:checked ~ .collapse ul {
 }
 
 .filter-btn:hover {
-  background: #357ABD;
+    background: #357ABD;
 }
 
 
 @media screen and (max-width: 768px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    height: auto;
-  }
+    .container {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
 
-  .collapse {
-    width: 90%;
-    margin: 20px auto;
-  }
+    .collapse {
+        width: 90%;
+        margin: 20px auto;
+    }
 
-  .search-box {
-    width: 90%;
-    margin: 20px auto;
-  }
+    .search-box {
+        width: 90%;
+        margin: 20px auto;
+    }
 
-  .card-body {
-    width: 90%;
-    max-width: none;
-    margin: 10px auto;
-  }
+    .card-body {
+        width: 90%;
+        max-width: none;
+        margin: 10px auto;
+    }
 
-  .menu {
-    width: 70%;
-  }
+    .menu {
+        width: 70%;
+    }
 
-  .menu-toggle {
-    font-size: 20px;
-    top: 15px;
-    left: 15px;
-  }
+    .menu-toggle {
+        font-size: 20px;
+        top: 15px;
+        left: 15px;
+    }
 
-  .intro img {
-    max-width: 50%;
-  }
+    .intro img {
+        max-width: 50%;
+    }
 
-  .filter-btn {
-    width: 90%;
-    padding: 12px;
-    font-size: 16px;
-  }
+    .filter-btn {
+        width: 90%;
+        padding: 12px;
+        font-size: 16px;
+    }
 }
 
 .auth-links {
@@ -390,7 +398,7 @@ input[type=checkbox]:checked ~ .collapse ul {
 }
 
 .auth-btn {
-    background-color:#A78BFA ;
+    background-color: #A78BFA;
     color: white;
     padding: 8px 14px;
     border-radius: 6px;
@@ -413,7 +421,7 @@ input[type=checkbox]:checked ~ .collapse ul {
     border-radius: 12px;
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
     font-family: 'Segoe UI', sans-serif;
-}   
+}
 
 .login-container h2 {
     text-align: center;
@@ -425,10 +433,10 @@ input[type=checkbox]:checked ~ .collapse ul {
     display: block;
     margin-top: 6px;
     font-weight: 600;
-    color: #374151 ;
+    color: #374151;
 }
 
-.login-container input[type="Text"], 
+.login-container input[type="Text"],
 .login-container input[type="password"] {
     width: 100%;
     padding: 12px;
@@ -436,18 +444,18 @@ input[type=checkbox]:checked ~ .collapse ul {
     border: 1px solid #CBD5E1;
     border-radius: 8px;
     font-size: 15px;
-    background-color: #F9FAFB ;
+    background-color: #F9FAFB;
     transition: border-color 0.3s;
 }
 
 .login-container input:focus {
     outline: none;
-    border-color: #6D28D9 ;
+    border-color: #6D28D9;
 }
 
 .login-container button {
     width: 100px;
-    background-color: #A78BFA ;
+    background-color: #A78BFA;
     color: white;
     padding: 12px;
     border: none;
@@ -475,18 +483,18 @@ input[type=checkbox]:checked ~ .collapse ul {
 }
 
 .register-link a:hover {
-    text-decoration: underline  ;
+    text-decoration: underline;
 }
 
 .logo-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .logo-wrapper img {
-  margin-top: 10px;
-  width: 120px;
-  max-width: 100%;
-  height: auto;
+    margin-top: 10px;
+    width: 120px;
+    max-width: 100%;
+    height: auto;
 }
