@@ -8,7 +8,7 @@
 body {
     display: flex;
     width: 100vw;
-    height: 100vh;
+    height: 2000px;
     background:
         linear-gradient(45deg,
             #A78BFA,
@@ -275,7 +275,6 @@ input[type=checkbox]:checked~.collapse ul {
     text-align: left;
     color: #333;
     transition: transform 2s ease, box-shadow 0.3s ease;
-    display: inline-block;
 }
 
 .card-body:hover {
