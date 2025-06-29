@@ -5,6 +5,9 @@
   <title>Add New Post</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="image/LogoTitle.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -31,7 +34,9 @@
     </form>
 
     <div class="register-link">
-      <a href="index.php">← Back to posts</a>
+      <a href="index.php">
+        <i class="fa-solid fa-backward"></i> Back to posts
+        </a>
     </div>
   </div>
 
