@@ -9,7 +9,6 @@
     <link rel="icon" type="image/png" href="image/LogoTitle.png">
 </head>
 <body>
-</div>
 
     <div class="login-container">
         <h2> Login to AskUni </h2>

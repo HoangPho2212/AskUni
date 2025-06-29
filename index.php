@@ -27,20 +27,21 @@
             <h2>Q&A Portal</h2>
         </div>
 
-        <div class="menu_item">
+        <a class="menu_item">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
-        </div>
+        </a>
 
-        <div class="menu_item">
+        <a href="add_post.php" class="menu_item">
             <i class="fa-solid fa-plus"></i>
             <span>Add Post</span>
-        </div>
+        </a>
 
-        <div class="menu_item">
+        <a class="menu_item">
             <i class="fa-solid fa-address-book"></i>
             <span>Contact</span>
-        </div>
+        </a>
+        
         <div class="watermark">
             <a href="https://www.facebook.com/hoang.pho.1911?locale=vi_VN">@2025 Hoang Pho</a>
         </div>
