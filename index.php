@@ -99,7 +99,7 @@
                 echo '<img src="' . htmlspecialchars($row['image']) . '" alt="Post Image" style="max-width:100%; height:auto;">';
             }
 
-            echo '<a href="#" class="btn-primary">View</a> ';
+            echo '<a href="view.php" class="btn-primary">View</a> ';
             echo '<a href="#" class="btn-secondary">Edit</a> ';
             echo '<a href="#" class="btn-danger">Delete</a>';
             echo '</div>';
