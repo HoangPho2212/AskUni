@@ -523,3 +523,7 @@ input[type=checkbox]:checked~.collapse ul {
     max-width: 100%;
     height: auto;
 }
+
+#role {
+    margin-right: 50px;
+}
