@@ -1,4 +1,16 @@
 <!-- register.php -->
+<?php
+  session_start();
+  include('db.php');
+
+  if (isset($_POST['register'])) {
+    $user = $_POST ['username'];
+    $email = $_POST ['email'];
+    $password = $_POST ['password'];
+    $role = $_POST ['role'];
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,11 +31,16 @@
       <label for="username">Username</label>
       <input type="text" id="username" name="username" placeholder="Choose a username" required>
 
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" placeholder="type your Gmail" required>
+
       <label for="password">Password</label>
       <input type="password" id="password" name="password" placeholder="Create a password" required>
 
-      <label for="confirm">Confirm Password</label>
-      <input type="password" id="confirm" name="confirm" placeholder="Re-type password" required>
+      <select id="role" name="role" require>
+        <option value="student">student</option>
+        <option value="admin">admin</option>
+      </select>
 
       <button type="submit" name="register">Register</button>
 
