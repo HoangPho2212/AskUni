@@ -1,6 +1,17 @@
 <?php
 require_once 'db.php';
 
+session_start(); // Start the session to access session variables
+
+// Check if the user is logged in
+if (isset($_SESSION['user_id'])) {
+    $user_id = $_SESSION['user_id'];  // Retrieve the logged-in user's ID
+} else {
+    // Redirect to login page if user is not logged in
+    header("Location: login.php");
+    exit();
+}
+
 if (isset($_POST['submit'])) {
   $title = $_POST['title'];
   $content = $_POST['content'];
