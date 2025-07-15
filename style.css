@@ -527,3 +527,25 @@ input[type=checkbox]:checked~.collapse ul {
 #role {
     margin-right: 50px;
 }
+
+#email {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #F9FAFB;
+    transition: border-color 0.3s;
+}
+
+#regisform {
+    max-height: 650px;
+    max-width: 400px;
+    margin: 100px auto;
+    background-color: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+}
