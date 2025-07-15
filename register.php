@@ -1,57 +1,79 @@
-<!-- register.php -->
 <?php
-  session_start();
-  include('db.php');
+// Start session if needed
+session_start();
 
-  if (isset($_POST['register'])) {
-    $user = $_POST ['username'];
-    $email = $_POST ['email'];
-    $password = $_POST ['password'];
-    $role = $_POST ['role'];
+// Include database connection
+require_once 'db.php';
+
+// Initialize message
+$registerMessage = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Safely get POST data
+  $username = $_POST['username'] ?? '';
+  $email = $_POST['email'] ?? '';
+  $password = $_POST['password'] ?? '';
+  $role = $_POST['role'] ?? 'student'; // Default role if not provided
+
+  // Optional: basic input validation
+  if (empty($username) || empty($email) || empty($password)) {
+    $registerMessage = "Please fill in all required fields.";
+  } else {
+    try {
+      // Hash the password
+      $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+      // Insert into DB using PDO
+      $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
+      $stmt->execute([$username, $email, $hashedPassword, $role]);
+
+      $registerMessage = "✅ User registered successfully!";
+    } catch (PDOException $e) {
+      $registerMessage = "❌ Registration failed: " . $e->getMessage();
+    }
   }
+}
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-  <title>Register | AskUni</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="image/LogoTitle.png">
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css"> <!-- Link to your CSS -->
 </head>
 
 <body>
 
   <div class="login-container">
-    <form action="register.php" method="POST" class="login-box">
-      <h2 class="login-title">Create an AskUni Account</h2>
+    <h2>User Registration</h2>
 
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" placeholder="Choose a username" required>
+    <?php if (!empty($registerMessage)): ?>
+      <p style="color: red;"><?= $registerMessage ?></p>
+    <?php endif; ?>
 
-      <label for="email">Email</label>
-      <input type="text" id="email" name="email" placeholder="type your Gmail" required>
+    <form method="POST" action="register.php">
+      <label for="username">Username:</label>
+      <input type="text" name="username" required>
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" placeholder="Create a password" required>
+      <label for="email">Email:</label>
+      <input id="email" type="email" name="email" required>
 
-      <select id="role" name="role" require>
-        <option value="student">student</option>
-        <option value="admin">admin</option>
+      <label for="password">Password:</label>
+      <input type="password" name="password" required>
+
+      <label for="role">Role:</label>
+      <select name="role">
+        <option value="student">Student</option>
+        <option value="admin">Admin</option>
       </select>
 
-      <button type="submit" name="register">Register</button>
+      <br><br>
+      <button type="submit">Register</button>
 
-      <p class="register-link">
+      <div class="register-link">
         Already have an account? <a href="login.php">Login here</a>
-      </p>
-
-      <div class="logo-wrapper">
-            <img src="image/LogoAskUni.png.png" alt="logo of ask uni">
-        </div>
-      
+      </div>
     </form>
   </div>
 
