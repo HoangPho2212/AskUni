@@ -27,9 +27,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $stmt = $pdo->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)");
       $stmt->execute([$username, $email, $hashedPassword, $role]);
 
-      $registerMessage = "✅ User registered successfully!";
+      $registerMessage = "User registered successfully!";
+
     } catch (PDOException $e) {
-      $registerMessage = "❌ Registration failed: " . $e->getMessage();
+      $registerMessage = "Registration failed: " . $e->getMessage();
     }
   }
 }
@@ -45,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-  <div class="login-container">
+  <div id="regisform" class="login-container">
     <h2>User Registration</h2>
 
     <?php if (!empty($registerMessage)): ?>
