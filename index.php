@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,10 +48,6 @@
             <i class="fa-solid fa-address-book"></i>
             <span>Contact</span>
         </a>
-        
-        <div class="watermark">
-            <a href="https://www.facebook.com/hoang.pho.1911?locale=vi_VN">@2025 Hoang Pho</a>
-        </div>
     </div>
 
     <div class="content">
