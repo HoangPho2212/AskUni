@@ -3,40 +3,25 @@ require_once 'db.php';
 
 session_start(); // Start the session to access session variables
 
-// Check if the user is logged in
-if (isset($_SESSION['user_id'])) {
-    $user_id = $_SESSION['user_id'];  // Retrieve the logged-in user's ID
-} else {
-    // Redirect to login page if user is not logged in
-    header("Location: login.php");
-    exit();
-}
-
-if (isset($_POST['submit'])) {
-  $title = $_POST['title'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $title = $_POST['title'] ?? '';
   $content = $_POST['content'];
-  $module_id = $_POST['module_id'];
+  $user_id = $_SESSION['user_id'] ?? '';
 
-  // Handle image upload
-  $imagePath = null;
-  if (!empty($_FILES['screenshot']['name'])) {
-    $imageName = basename($_FILES['screenshot']['name']);
-    $targetDir = "uploads/";
-    if (!is_dir($targetDir)) {
-      mkdir($targetDir); // create the folder if not exist
-    }
-    $targetFile = $targetDir . time() . '_' . $imageName;
-    if (move_uploaded_file($_FILES["screenshot"]["tmp_name"], $targetFile)) {
-      $imagePath = $targetFile;
-    }
+  if (empty($title) || empty($content)) {
+    echo "Please fill in both fields.";
+  } else {
+    try {
+    $stmt = $pdo->prepare( "INSERT INTO posts (User_id, title, content) VALUES (?,?,?)");
+    $stmt->execute([$user_id, $title, $content]);
+
+    header("Location: index.php");
+    exit;
+  } catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+  }
   }
 
-  // Insert into DB
-  $stmt = $pdo->prepare("INSERT INTO posts (title, content, module_id, image) VALUES (?, ?, ?, ?)");
-  $stmt->execute([$title, $content, $module_id, $imagePath]);
-
-  header("Location: index.php");
-  exit();
 }
 ?>
 
