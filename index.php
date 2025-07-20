@@ -4,7 +4,9 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,10 +19,10 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <div class="auth-links">
+    <!-- <div class="auth-links">
         <a href="login.php" class="auth-btn">Login</a>
         <a href="register.php" class="auth-btn">Register</a>
-    </div>
+    </div> -->
 
 </head>
 
@@ -98,9 +100,9 @@ if (!isset($_SESSION['user_id'])) {
             echo '<p class="card-text">By ' . htmlspecialchars($row['username']) . ' | Module: ' . htmlspecialchars($row['module_name']) . ' | ' . $row['created_at'] . '</p>';
             echo '<p class="card-text">' . nl2br(htmlspecialchars($row['content'])) . '</p>';
 
-            if (!empty($row['image'])) {
-                echo '<img src="' . htmlspecialchars($row['image']) . '" alt="Post Image" style="max-width:100%; height:auto;">';
-            }
+            // if (!empty($row['image'])) {
+            //     echo '<img src="' . htmlspecialchars($row['image']) . '" alt="Post Image" style="max-width:100%; height:auto;">';
+            // }
 
             echo '<a href="view.php?id=' . $row['id'] . '" class="btn-primary">View</a>';
             echo '<a href="#" class="btn-secondary">Edit</a> ';
