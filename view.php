@@ -97,6 +97,18 @@ if ($id) {
         <?php endif; ?>
     </div>
 
-</body>
+    <h3>Leave a comment</h3>
+    <form action="" method="POST">
+        <label for="username">Name</label>
+        <input type="text" name="username" required><br><br>
+        
+        <label for="comment">Comment:</label><br>
+        <textarea name="comment" rows="4" required></textarea><br><br>
+
+        <input type="submit" name="submit_comment" value="Post Comment">
+    </form>
+
+
+    </body>
 
 </html>
