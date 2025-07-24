@@ -97,15 +97,15 @@ if ($id) {
         <?php endif; ?>
     </div>
 
-    <h3>Leave a comment</h3>
-    <form action="" method="POST">
-        <label for="username">Name</label>
+    <form style="max-width: 700px;" class="login-container" action="" method="POST">
+        <h1>Leave a comment</h1>
+        <label for="username">User name</label>
         <input type="text" name="username" required><br><br>
         
         <label for="comment">Comment:</label><br>
-        <textarea name="comment" rows="4" required></textarea><br><br>
+        <textarea class="Comment-area" name="comment" rows="4" required></textarea><br><br>
 
-        <input type="submit" name="submit_comment" value="Post Comment">
+        <input class="submit-btn" type="submit" name="submit_comment" value="Post">
     </form>
 
 
