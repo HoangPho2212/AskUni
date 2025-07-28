@@ -106,8 +106,12 @@ if (!isset($_SESSION['user_id'])) {
 
                 <div class="btn-wrapper">
                     <a href="view.php?id=<?= $post['id'] ?>" class="btn-primary">View</a>
-                    <a href="edit_post.php?id=<?= $post['id'] ?>" class="btn-secondary">Edit</a>
-                    <a href="delete_post.php?id=<?= $post['id'] ?>" class="btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                        <a href="edit_post.php?id=<?= $post['id'] ?>" class="btn-secondary">Edit</a>
+                        <a href="delete_post.php?id=<?= $post['id'] ?>" class="btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                    <?php endif; ?>
+
                 </div>
             </div>
         <?php endforeach; ?>
