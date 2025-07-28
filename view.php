@@ -1,19 +1,37 @@
 <?php
 require_once 'db.php';
+session_start();
 
-// Get post ID from the URL and validate it as an integer
-$id = isset($_GET['id']) && is_numeric($_GET['id']) ? (int)$_GET['id'] : null;
-$post = null;
+$post_id = $_GET['id'] ?? null;
 
-// Fetch the post if ID is valid
-if ($id) {
-    $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
-    $stmt->execute([$id]);
-    $post = $stmt->fetch(PDO::FETCH_ASSOC);
+if (!$post_id) {
+    echo "<p style='color:red; text-align:center;'>Post ID is missing.</p>";
+    exit;
 }
 
-?>
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment_submit'])) {
+    $comment = trim($_POST['comment']);
+    if (!empty($comment) && isset($_SESSION['user_id'])) {
+        $stmt = $pdo->prepare("INSERT INTO comments (post_id, user_id, comment) VALUES (?, ?, ?)");
+        $stmt->execute([$post_id, $_SESSION["user_id"], $comment]);
+    }
+    
+    }
 
+$stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
+$stmt->execute([$post_id]);
+$post = $stmt->fetch();
+
+$comment_stmt = $pdo->prepare("SELECT c.comment, c.created_at, u.username 
+                               FROM comments c
+                               JOIN users u ON c.user_id = u.id 
+                               WHERE c.post_id = ?
+                               ORDER BY c.created_at DESC");
+
+$comment_stmt->execute([$post_id]);
+$comments = $comment_stmt->fetchAll();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,16 +115,35 @@ if ($id) {
         <?php endif; ?>
     </div>
 
-    <form style="max-width: 700px;" class="login-container" action="" method="POST">
+    <?php if (isset($_SESSION['user_id'])): ?>
+    <div class="card-body">
+    <form style="max-width: 350px;" action="" method="POST">
         <h1>Leave a comment</h1>
-        <label for="username">User name</label>
-        <input type="text" name="username" required><br><br>
-        
+    
         <label for="comment">Comment:</label><br>
-        <textarea class="Comment-area" name="comment" rows="4" required></textarea><br><br>
+        <textarea class="Comment-area" name="comment" placeholder="type your comment here..." required></textarea><br><br>
 
-        <input class="submit-btn" type="submit" name="submit_comment" value="Post">
+        <button class="submit-btn" type="submit" name="comment_submit"> Post </button>
     </form>
+    </div>
+    <?php else: ?>
+        <p style="text-align: center;"> Please <a href="login.php">login</a> to comment.</p>
+    <?php endif; ?>
+
+    <div class="card-body">
+        <h2>Comments</h2>
+        <?php if (!empty($comment)): ?>
+            <?php foreach ($comments as $c): ?>
+                <div style="margin-bottom: 20px;">
+                    <p><strong><?= htmlspecialchars($c['username']) ?></strong> commented on <?= date("F j, Y, g:i a", strtotime($c['created_at'])) ?>:</p>
+                    <p><?= nl2br(htmlspecialchars($c['comment'])) ?></p>
+                    <hr>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>No comments yet.</p>
+        <?php endif; ?>
+
 
 
     </body>
