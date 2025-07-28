@@ -436,7 +436,7 @@ input[type=checkbox]:checked~.collapse ul {
     color: #374151;
 }
 
-.login-container input[type="Text"],
+.login-container input[type="text"],
 .login-container input[type="password"] {
     width: 100%;
     padding: 12px;
