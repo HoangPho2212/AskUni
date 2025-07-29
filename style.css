@@ -598,3 +598,31 @@ input[type=checkbox]:checked~.collapse ul {
     width: 100%;
     resize: vertical;
 }
+
+footer {    
+    text-align: center;
+    color: #5c5b5b;;
+    padding: 24px 0px 16px 0px;
+    font-size: 1rem;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+    margin-top: 20px;
+}
+
+footer a {
+    color: #4B5563;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #A78BFA
+}
+
+footer p {
+    margin: 8px 0;
+}
+
+footer .developer {
+    font-size: 0.9rem;
+    color: #6b7280;
+}

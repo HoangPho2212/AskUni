@@ -36,7 +36,7 @@ if (!isset($_SESSION['user_id'])) {
             <h2>Q&A Portal</h2>
         </div>
 
-        <a class="menu_item">
+        <a href="index.php" class="menu_item">
             <i class="fa-solid fa-house"></i>
             <span>Home</span>
         </a>
@@ -115,6 +115,17 @@ if (!isset($_SESSION['user_id'])) {
                 </div>
             </div>
         <?php endforeach; ?>
+        <footer>
+        <div>
+            <p>&copy; <?= date('Y') ?>.Ask At University. All rights reserved.</p>
+            <p>
+                <a href="contact.php">Contact Us</a> |
+                <a>About</a>
+            </p>
+            <p class="developer"> developed by <a style="text-decoration: none;" href="https://github.com/HoangPho2212">Hoang Pho</a>
+            </p>
+        </div>
+    </footer>
     </div>
 
 
