@@ -46,7 +46,7 @@ if (!isset($_SESSION['user_id'])) {
             <span>Add Post</span>
         </a>
 
-        <a class="menu_item">
+        <a href="contact.php" class="menu_item">
             <i class="fa-solid fa-address-book"></i>
             <span>Contact</span>
         </a>

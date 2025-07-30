@@ -47,8 +47,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Edit Post</title>
     <link rel="stylesheet" href="style.css?v=1.1">
     <link rel="icon" type="image/png" href="image/LogoTitle.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <input type="checkbox" id="menu-toggle" hidden>
+    <label for="menu-toggle" class="menu-toggle"><i class="fa-solid fa-bars-staggered"></i></label>
+
+    <div class="menu">
+
+        <div class="menu_header">
+            <h2>Q&A Portal</h2>
+        </div>
+
+        <a href="index.php" class="menu_item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+
+        <a href="add_post.php" class="menu_item">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Post</span>
+        </a>
+
+        <a href="contact.php" class="menu_item">
+            <i class="fa-solid fa-address-book"></i>
+            <span>Contact</span>
+        </a>
+    </div>
+
     <div style="width: 400px;" class="login-container">
     <h2>Edit Post</h2>
 
