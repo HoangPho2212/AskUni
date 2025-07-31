@@ -50,14 +50,13 @@ if (!isset($_SESSION['user_id'])) {
             <span>Contact</span>
         </a>
 
-        <a href="users.php" class="menu_item">
-            <i class="fa-solid fa-users"></i>
-            <?php
+        <?php
                 if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                    echo '<a href="users.php" class="menu_item">
+                            <i class="fa-solid fa-users"></i>';
                     echo '<span>Users</span>';
                 }
             ?>
-        </a>
 
     </div>
 
