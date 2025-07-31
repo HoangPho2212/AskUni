@@ -1,49 +1,70 @@
 <?php
-session_start();
 require 'db.php';
+session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 
+require 'PHPMailer-master/src/PHPMailer.php';
+require 'PHPMailer-master/src/SMTP.php';
+require 'PHPMailer-master/src/Exception.php';
+
+
+$success = '';
+$userrname = '';
 $email = '';
 $message = '';
-$success = '';
-
 
 if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT username, email FROM users WHERE id = ?");
-    $stmt->execute([
-        $_SESSION['user_id'] 
-    ]);
-
+    $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch();
+
     if ($user) {
         $userrname = $user['username'];
-        $email = $user['email'];
+        $email = $user['email']; 
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $userrname = trim($_POST['username']);
     $email = trim($_POST['email']);
     $message = trim($_POST['message']);
 
     if ($userrname && $email && $message) {
+        $mail = new PHPMailer(true);
         try {
-            $stmt = $pdo->prepare("INSERT INTO contact_messages (user_id, email, message) VALUES (?, ?, ?)");
-            $stmt->execute([
-                $_SESSION['user_id'] ?? null,
-                $email, 
-                $message
-            ]);
-            $success = "Your message has been sent successfully!";
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Set the SMTP server to send through
+            $mail->SMTPAuth = true;
+            $mail->Username = 'Hoangpho.2212@gmail.com';
+            $mail->Password = 'vhsj mmiq pggc dmeq';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            $mail->setFrom('Hoangpho.2212@gmail.com', 'Contact Bot');
+            $mail->addAddress('phonhhgcd230181@fpt.edu.vn', 'Admin');
+
+            $mail->isHTML(true);
+            $mail->Subject = 'Contact Form Submission';
+            $mail->Body = "<strong>Username:</strong> " . htmlspecialchars($userrname) . "<br>" .
+                          "<strong>Email:</strong> " . htmlspecialchars($email) . "<br>" .
+                          "<strong>Message:</strong><br>" . nl2br(htmlspecialchars($message));
+
+            $mail->send();
+            $success = 'Message sent successfully!';
             $message = ''; // Clear the message after sending
-        } catch (PDOException $e) {
-            $success = "Error: " . $e->getMessage();
+            $success = '';
+
+        } catch (Exception $e) {
+            $success = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
         }
     } else {
-        $success = "Please fill in all fields.";
+        $success = 'Please fill in all fields.';
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -84,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </a>
     </div>
 
-    <div class="login-container">
+    <div style="max-height: 600px;" class="login-container">
         <h2>Contact Admin</h2>
 
         <?php if ($success): ?>
@@ -92,9 +113,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form method="POST" action="contact.php">
+
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" value="<?= htmlspecialchars($userrname) ?>" required>
-
+            
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" value="<?= htmlspecialchars($email) ?>" required>
 
