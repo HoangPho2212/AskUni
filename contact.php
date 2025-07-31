@@ -56,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $mail->send();
             $success = 'Message sent successfully!';
             $message = ''; // Clear the message after sending
-            $success = '';
 
         } catch (Exception $e) {
             $success = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
