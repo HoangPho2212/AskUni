@@ -75,11 +75,11 @@ if (isset($_GET['delete_user_id'])) {
             <?php
                 if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
                     echo '<a href="users.php" class="menu_item">
-                            <i class="fa-solid fa-users"></i>';
-                    echo '<span>Users</span>';
+                            <i class="fa-solid fa-users"></i>
+                            <span>Users</span>
+                            </a>';
                 }
             ?>
-            </a>
     </div>
     <!-- User Management Section -->
     <div class="content">
