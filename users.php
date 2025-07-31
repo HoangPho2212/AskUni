@@ -1,4 +1,41 @@
+<?php
+// Start the session and include the database connection
+require 'db.php';
+session_start();
 
+// Ensure the user is an admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header("Location: index.php");  // Redirect to homepage if not an admin
+    exit();
+}
+
+// Fetch the list of users from the database using PDO
+try {
+    $stmt = $pdo->prepare("SELECT id, username, email FROM users");
+    $stmt->execute();
+    $users = $stmt->fetchAll();
+} catch (PDOException $e) {
+    die("Database query failed: " . $e->getMessage());
+}
+
+// Handle user deletion
+if (isset($_GET['delete_user_id'])) {
+    $user_id = $_GET['delete_user_id'];
+
+    // Prepare and execute the delete query
+    try {
+        $delete_stmt = $pdo->prepare("DELETE FROM users WHERE id = :user_id");
+        $delete_stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        $delete_stmt->execute();
+
+        // Redirect back to users page after deletion
+        header("Location: users.php");
+        exit();
+    } catch (PDOException $e) {
+        echo "Error deleting user: " . $e->getMessage();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
