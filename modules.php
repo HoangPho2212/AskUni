@@ -129,7 +129,7 @@ try {
             <thead>
                 <tr>
                     <th>id</th>
-                    <th>Module name</th>
+                    <th style="text-align: center;" >Module name</th>
                 </tr>
             </thead>
             <tbody>
