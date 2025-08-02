@@ -1,9 +1,19 @@
 <?php
 session_start();
+require 'db.php';
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
+
+$stmt = $pdo->query("
+    SELECT posts.*, users.username, modules.name AS module_name
+    FROM posts
+    JOIN users ON posts.user_id = users.id
+    JOIN modules ON posts.module_id = modules.id
+    ORDER BY posts.created_at DESC
+");
+$posts = $stmt->fetchAll();
 
 ?>
 
@@ -51,17 +61,17 @@ if (!isset($_SESSION['user_id'])) {
         </a>
 
         <?php
-                if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-                    echo '<a href="users.php" class="menu_item">
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+            echo '<a href="users.php" class="menu_item">
                             <i class="fa-solid fa-users"></i>
                             <span>Users</span>
                         </a>';
-                    echo '<a href="modules.php" class="menu_item">
+            echo '<a href="modules.php" class="menu_item">
                             <i class="fa-solid fa-pen-to-square"></i>
                             <span>Modules</span>
                         </a>';
-                }
-            ?>
+        }
+        ?>
     </div>
 
     <div class="content">
@@ -98,29 +108,21 @@ if (!isset($_SESSION['user_id'])) {
                 </a>
             </div>
         </div>
-        <?php
-        require 'db.php';
 
-        try {
-            $stmt = $pdo->query("SELECT * FROM posts ORDER BY created_at DESC");
-            $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-            $posts = [];
-        }
-
-        ?>
         <?php foreach ($posts as $post): ?>
 
             <div class="card-body">
                 <h3 class="card-title"><?= htmlspecialchars($post['title']) ?></h3>
                 <p><?= nl2br(htmlspecialchars(substr($post['content'], 0, 150))) ?>...</p>
+                <p><strong>Posted by:</strong> <?php echo htmlspecialchars($post['username']);?>
+                    | <strong>Module:</strong> <?php echo htmlspecialchars($post['module_name']);?>
+                </p>
+        
 
                 <div class="btn-wrapper">
                     <a href="view.php?id=<?= $post['id'] ?>" class="btn-primary">View</a>
 
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                        <a href="edit_post.php?id=<?= $post['id'] ?>" class="btn-secondary">Edit</a>
                         <a href="delete_post.php?id=<?= $post['id'] ?>" class="btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
                     <?php endif; ?>
 
