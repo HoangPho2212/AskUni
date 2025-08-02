@@ -6,6 +6,33 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: index.php");  // Redirect to homepage if not an admin
     exit();
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['module_name'])) {
+    $name = trim($_POST['module_name']);
+
+    try {
+        $insert_stmt = $pdo->prepare("INSERT INTO modules (name) VALUES (:module_name)");
+        $insert_stmt->execute([':module_name' => $name]);
+        header("Location: modules.php");
+        exit();
+    } catch (PDOException $e) {
+        echo "Error adding module: " . $e->getMessage();    
+    }
+
+
+    // Prepare and execute the insert query
+    try {
+        $insert_stmt = $pdo->prepare("INSERT INTO modules (name) VALUES (:module_name)");
+        $insert_stmt->bindParam(':module_name', $module_name, PDO::PARAM_STR);
+        $insert_stmt->execute();
+
+        // Redirect back to modules page after insertion
+        header("Location: modules.php");
+        exit();
+    } catch (PDOException $e) {
+        echo "Error adding module: " . $e->getMessage();
+    }
+}
+
 try {
     $stmt = $pdo->prepare("SELECT id, name FROM modules");
     $stmt->execute();
@@ -32,9 +59,14 @@ if (isset($_GET['delete_module'])) {
     }
 }
 
+try {
+    $stmt = $pdo->prepare("SELECT id, name FROM modules");
+    $stmt->execute();
+    $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die("Database query failed: " . $e->getMessage());
 
-
-
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,7 +82,7 @@ if (isset($_GET['delete_module'])) {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     
 </head>
-<body>
+<body style="display: flex; flex-direction: column;" >
     <input type="checkbox" id="menu-toggle" hidden>
     <label for="menu-toggle" class="menu-toggle"><i class="fa-solid fa-bars-staggered"></i></label>
 
@@ -113,6 +145,13 @@ if (isset($_GET['delete_module'])) {
             </tbody>
         </table>
     </div>
+<!-- Form to add a new module -->
+    <div class="login-container">
+        <h2>Add New Module</h2>
+    <form method="POST" class="form">
+        <input type="text" name="module_name" class="input" placeholder="Enter new module name" required>
+        <button type="submit" class="button">Add Module</button>
+    </form>
 
     
 </body>
