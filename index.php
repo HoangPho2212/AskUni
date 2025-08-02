@@ -122,8 +122,16 @@ $posts = $stmt->fetchAll();
                 <div class="btn-wrapper">
                     <a href="view.php?id=<?= $post['id'] ?>" class="btn-primary">View</a>
 
-                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                        <a href="delete_post.php?id=<?= $post['id'] ?>" class="btn-danger" onclick="return confirm('Are you sure you want to delete this post?');">Delete</a>
+                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $post['user_id']): ?>
+                        <a href="edit_post.php?id=<?= $post['id'] ?>" class="btn-secondary">Edit</a>
+                    <?php endif; ?>
+                    
+                    <?php if ( 
+                        (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') ||
+                        (isset($_SESSION['user_id']) && $_SESSION['user_id'] === $post ['user_id'])
+                        ): ?>
+                        <a href="delete_post.php?id=<?= $post['id'] ?>" class="btn-danger"
+                            onclick="return confirm('Are you sure you want to delete this post?');">Delete</a> 
                     <?php endif; ?>
 
                 </div>

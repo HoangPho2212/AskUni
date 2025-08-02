@@ -24,8 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "Please fill in both fields.";
   } else {
     try {
-    $stmt = $pdo->prepare( "INSERT INTO posts (User_id, title, content, image) VALUES (?,?,?,?)");
-    $stmt->execute([$user_id, $title, $content, $imagePath ?? null]);
+    $stmt = $pdo->prepare( "INSERT INTO posts (User_id, title, content, image, module_id) VALUES (?,?,?,?,?)");
+    $stmt->execute([$user_id, $title, $content, $imagePath, $module_id ?? null]);
 
     header("Location: index.php");
     exit;

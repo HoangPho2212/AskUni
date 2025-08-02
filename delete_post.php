@@ -8,6 +8,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
+if ($_SESSION['role'] !== 'admin' && $_SESSION['user_id'] != $post['user_id']) {
+    die("Access denied. You can't delete this post.");
+}
+
 $post_id = $_GET['id'] ?? '';
 if (!$post_id) {
     echo "Post ID is missing.";

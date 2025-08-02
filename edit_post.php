@@ -38,6 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     }
 
+if ($_SESSION['user_id'] != $post['user_id']) {
+    die("Access denied. You can only edit your own post.");
+}
 ?>
 
 <!DOCTYPE html>
