@@ -74,6 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <i class="fa-solid fa-address-book"></i>
             <span>Contact</span>
         </a>
+        <?php
+                if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+                    echo '<a href="users.php" class="menu_item">
+                            <i class="fa-solid fa-users"></i>
+                            <span>Users</span>
+                        </a>';
+                    echo '<a href="modules.php" class="menu_item">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Modules</span>
+                        </a>';
+                }
+            ?>
     </div>
   <div class="login-container">
     <h2>Add New Post</h2>

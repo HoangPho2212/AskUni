@@ -56,6 +56,10 @@ if (!isset($_SESSION['user_id'])) {
                             <i class="fa-solid fa-users"></i>
                             <span>Users</span>
                         </a>';
+                    echo '<a href="modules.php" class="menu_item">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <span>Modules</span>
+                        </a>';
                 }
             ?>
     </div>
