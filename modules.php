@@ -14,6 +14,25 @@ try {
     die("Database query failed: " . $e->getMessage());
 }
 
+// Handle module deletion
+if (isset($_GET['delete_module'])) {
+    $module_id = $_GET['delete_module'];
+
+    // Prepare and execute the delete query
+    try {
+        $delete_stmt = $pdo->prepare("DELETE FROM modules WHERE id = :module_id");
+        $delete_stmt->bindParam(':module_id', $module_id, PDO::PARAM_INT);
+        $delete_stmt->execute();
+
+        // Redirect back to modules page after deletion
+        header("Location: modules.php");
+        exit();
+    } catch (PDOException $e) {
+        echo "Error deleting module: " . $e->getMessage();
+    }
+}
+
+
 
 
 ?>
@@ -87,7 +106,7 @@ try {
                         <td><?php echo htmlspecialchars($module['id']); ?></td>
                         <td><?php echo htmlspecialchars($module['name']); ?></td>
                         <td>
-                            <a href=".php?delete_modules=<?php echo $module['id']; ?>" class="btn-danger" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                            <a href="modules.php?delete_module=<?php echo $module['id']; ?>" class="btn-danger" onclick="return confirm('Are you sure you want to delete this module?');">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
