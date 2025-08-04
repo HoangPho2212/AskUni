@@ -1,19 +1,44 @@
 <?php
 session_start();
 require 'db.php';
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
-$stmt = $pdo->query("
+$moduleFilter = $_GET['module'] ?? '';
+$search = $_GET['search'] ?? '';
+
+$query = "
     SELECT posts.*, users.username, modules.name AS module_name
     FROM posts
     JOIN users ON posts.user_id = users.id
     JOIN modules ON posts.module_id = modules.id
-    ORDER BY posts.created_at DESC
-");
-$posts = $stmt->fetchAll();
+    WHERE 1=1
+    ";
+
+$params = [];
+
+if (!empty($moduleFilter)) {
+    $query .= " AND modules.name = :module";
+    $params[':module'] = $moduleFilter;
+}
+
+if (!empty($search)) {
+    $query .= " AND (posts.title LIKE :search OR posts.content LIKE :search)";
+    $params[':search'] = '%' . $search . '%';
+}
+
+$query .= " ORDER BY posts.created_at DESC";
+
+$stmt = $pdo->prepare($query);
+$stmt->execute($params);
+$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$modulestmt = $pdo->query("SELECT name FROM modules");
+$modules = $modulestmt->fetchAll(PDO::FETCH_COLUMN);
+
 
 ?>
 
@@ -88,9 +113,11 @@ $posts = $stmt->fetchAll();
                         <p>Filter by Module</p>
                         <select class="details" name="module">
                             <option value="">All</option>
-                            <option value="COMP1841">Web Programming 1</option>
-                            <option value="COMP1773"> User Interface Design</option>
-                            <option value="COMP1770"> Professional Project Management</option>
+                            <?php foreach ($modules as $module): ?>
+                                <option value="<?= htmlspecialchars($module) ?>" <?= $moduleFilter === $module ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($module) ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </label>
 
@@ -101,12 +128,15 @@ $posts = $stmt->fetchAll();
                     <i class="fa-solid fa-filter"></i>
                 </button>
             </form>
+            <form method="GET" action="index.php">
             <div class="search-box">
-                <input type="text" class="search-txt" name="" placeholder="what's your problem?">
-                <a href="#" class="search-btn">
+                <input type="text" class="search-txt" name="search" placeholder="what's your problem?" value="<?= htmlspecialchars($search) ?>" >
+                <button style="border: none;" type="submit" class="search-btn">
                     <i class="fa-solid fa-question"></i>
-                </a>
+                </button>
+                
             </div>
+            </form>
         </div>
 
         <?php foreach ($posts as $post): ?>
