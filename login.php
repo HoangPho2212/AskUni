@@ -58,7 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
 
-    <div class="login-container">
+    <div style="
+    max-height: 650px;
+    max-width: 400px;" class="login-container">
         <h2> Login to AskUni </h2>
 
         <?php if (!empty($loginMessage)): ?>

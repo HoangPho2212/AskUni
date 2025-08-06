@@ -92,7 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             ?>
     </div>
-  <div class="login-container">
+  <div class="login-container" style="
+    max-height: 650px;
+    max-width: 400px;">
     <h2>Add New Post</h2>
     <form action="add_post.php" method="POST" enctype="multipart/form-data">
       <label for="title">Title</label>
