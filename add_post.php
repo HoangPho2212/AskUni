@@ -1,25 +1,29 @@
 <?php
+session_start(); // Start the session to access session variables
 require_once 'db.php';
 
-session_start(); // Start the session to access session variables
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // get post data
   $title = $_POST['title'] ?? '';
   $content = $_POST['content'];
   $user_id = $_SESSION['user_id'] ?? '';
   $module_id = $_POST['module_id'] ?? '';
   $imagePath = '';
 
+  // Handle file upload if an image is provided
   if (!empty($_FILES['image']['name'])) {
-    $targetDir = 'uploads/';
-    $fileName = basename($_FILES['image']['name']);
-    $targetFilePath = $targetDir . time() . '_' .$fileName;
+    $targetDir = 'uploads/'; // where images will be uploaded
+    $fileName = basename($_FILES['image']['name']); // x url take only file name
+    $targetFilePath = $targetDir . time() . '_' .$fileName; // 
 
+     // Move uploaded file to target directory
     if(move_uploaded_file($_FILES['image']['tmp_name'], $targetFilePath)) {
-      $imagePath = $targetFilePath;
+      $imagePath = $targetFilePath; // store the path in DB later 
     }
   }
 
+// Validate input
   if (empty($title) || empty($content)) {
     echo "Please fill in both fields.";
   } else {
@@ -29,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     header("Location: index.php");
     exit;
+    
   } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
   }

@@ -1,7 +1,8 @@
 <?php
 require_once 'db.php';
-session_start();
+session_start(); 
 
+// Get the post ID from the URL
 $post_id = $_GET['id'] ?? null;
 
 if (!$post_id) {
@@ -9,19 +10,25 @@ if (!$post_id) {
     exit;
 }
 
+
+// handle comment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment_submit'])) {
     $comment = trim($_POST['comment']);
+
     if (!empty($comment) && isset($_SESSION['user_id'])) {
+        // Insert the comment into the database
         $stmt = $pdo->prepare("INSERT INTO comments (post_id, user_id, comment) VALUES (?, ?, ?)");
         $stmt->execute([$post_id, $_SESSION["user_id"], $comment]);
     }
     
     }
 
+// Fetch the post details
 $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
 $stmt->execute([$post_id]);
 $post = $stmt->fetch();
 
+//Fetch comments for this post, with usernames, newest first
 $comment_stmt = $pdo->prepare("SELECT c.comment, c.created_at, u.username 
                                FROM comments c
                                JOIN users u ON c.user_id = u.id 

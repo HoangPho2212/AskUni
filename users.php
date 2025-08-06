@@ -1,11 +1,10 @@
 <?php
-// Start the session and include the database connection
-require 'db.php';
 session_start();
+require 'db.php';
 
 // Ensure the user is an admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php");  // Redirect to homepage if not an admin
+    header("Location: index.php");  
     exit();
 }
 

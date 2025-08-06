@@ -1,11 +1,13 @@
 <!-- Login -->
 <?php
-session_start();
+session_start(); // Start session to store login state
 require_once 'db.php';
 
 $loginMessage = '';
 
+// Process form only when it's submitted via POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get input values from the form
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
@@ -18,20 +20,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$username]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            // // Debugging 
-            // echo '<pre>';
-            // print_r($user);
-            // echo '</pre>';
 
             if ($user) {
                 // Check if the password is correct
                 if (password_verify($password, $user['password'])) {
+                    //Store user info in session for authentication across pages
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['role'] = $user['role'];
 
                     header("Location: index.php");
                     exit;
+                    
                 } else {
                     $loginMessage = "Invalid password.";
                 }

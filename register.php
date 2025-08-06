@@ -1,21 +1,17 @@
 <?php
-// Start session if needed
 session_start();
-
-// Include database connection
 require_once 'db.php';
 
-// Initialize message
+
 $registerMessage = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Safely get POST data
   $username = $_POST['username'] ?? '';
   $email = $_POST['email'] ?? '';
   $password = $_POST['password'] ?? '';
   $role = $_POST['role'] ?? 'student'; // Default role if not provided
 
-  // Optional: basic input validation
+  // Validate input
   if (empty($username) || empty($email) || empty($password)) {
     $registerMessage = "Please fill in all required fields.";
   } else {

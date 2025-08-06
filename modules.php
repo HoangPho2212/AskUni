@@ -2,47 +2,30 @@
 session_start();
 require 'db.php';
 
+// Check if the user is logged in and has admin role
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: index.php");  // Redirect to homepage if not an admin
     exit();
 }
+
+// Handle form submission for adding a new module
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['module_name'])) {
     $name = trim($_POST['module_name']);
 
     try {
         $insert_stmt = $pdo->prepare("INSERT INTO modules (name) VALUES (:module_name)");
         $insert_stmt->execute([':module_name' => $name]);
+
         header("Location: modules.php");
         exit();
+
     } catch (PDOException $e) {
         echo "Error adding module: " . $e->getMessage();    
     }
-
-
-    // Prepare and execute the insert query
-    try {
-        $insert_stmt = $pdo->prepare("INSERT INTO modules (name) VALUES (:module_name)");
-        $insert_stmt->bindParam(':module_name', $module_name, PDO::PARAM_STR);
-        $insert_stmt->execute();
-
-        // Redirect back to modules page after insertion
-        header("Location: modules.php");
-        exit();
-    } catch (PDOException $e) {
-        echo "Error adding module: " . $e->getMessage();
-    }
-}
-
-try {
-    $stmt = $pdo->prepare("SELECT id, name FROM modules");
-    $stmt->execute();
-    $modules = $stmt->fetchAll();
-} catch (PDOException $e) {
-    die("Database query failed: " . $e->getMessage());
 }
 
 // Handle module deletion
-if (isset($_GET['delete_module'])) {
+if (isset($_GET['delete_module'])) { 
     $module_id = $_GET['delete_module'];
 
     // Prepare and execute the delete query
@@ -59,6 +42,7 @@ if (isset($_GET['delete_module'])) {
     }
 }
 
+// Fetch all modules from the database
 try {
     $stmt = $pdo->prepare("SELECT id, name FROM modules");
     $stmt->execute();

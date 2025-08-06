@@ -2,35 +2,35 @@
 session_start();
 require 'db.php';
 
-
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php");
+// redirect if not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
     exit;
 }
 
-if ($_SESSION['role'] !== 'admin' && $_SESSION['user_id'] != $post['user_id']) {
-    die("Access denied. You can't delete this post.");
-}
-
+// Get post ID from URL
 $post_id = $_GET['id'] ?? '';
 if (!$post_id) {
-    echo "Post ID is missing.";
-    exit;
+    die("Post ID is missing.");
 }
 
+// Fetch the post first
 $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ?");
 $stmt->execute([$post_id]);
 $post = $stmt->fetch();
 
+if (!$post) {
+    die("Post not found.");
+}
 
+// Check permissions
+if ($_SESSION['role'] !== 'admin' && $_SESSION['user_id'] != $post['user_id']) {
+    die("Access denied. You can't delete this post.");
+}
+
+// Now delete
 $stmt = $pdo->prepare("DELETE FROM posts WHERE id = ?");
 $stmt->execute([$post_id]);
-
-if ($stmt->rowCount() > 0) {
-    echo "Post deleted successfully.";
-} else {
-    echo "Failed to delete the post or post does not exist.";
-}
 
 header("Location: index.php");
 exit;

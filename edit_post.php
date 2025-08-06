@@ -2,9 +2,9 @@
 session_start();
 require 'db.php'; 
 
-// Check if the user is logged in and is an admin
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php");
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
     exit;
 }
 

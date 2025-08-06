@@ -2,31 +2,35 @@
 require 'db.php';
 session_start();
 
+// Include PHPMailer classes
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
+// attach PHPMailer files
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
 require 'PHPMailer-master/src/Exception.php';
 
-
+// variables to hold form data
 $success = '';
 $userrname = '';
 $email = '';
 $message = '';
 
+// Check if the user is logged in
 if (isset($_SESSION['user_id'])) {
     $stmt = $pdo->prepare("SELECT username, email FROM users WHERE id = ?");
     $stmt->execute([$_SESSION['user_id']]);
     $user = $stmt->fetch();
 
     if ($user) {
+        // Populate form fields with user data
         $userrname = $user['username'];
         $email = $user['email']; 
     }
 }
 
+// handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     $userrname = trim($_POST['username']);
     $email = trim($_POST['email']);
@@ -43,16 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             $mail->Password = 'vhsj mmiq pggc dmeq';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
-
+            // sender and recipient settings
             $mail->setFrom('Hoangpho.2212@gmail.com', 'Contact Bot');
             $mail->addAddress('phonhhgcd230181@fpt.edu.vn', 'Admin');
-
+        
+            // Content settings
             $mail->isHTML(true);
             $mail->Subject = 'Contact Form Submission';
             $mail->Body = "<strong>Username:</strong> " . htmlspecialchars($userrname) . "<br>" .
                           "<strong>Email:</strong> " . htmlspecialchars($email) . "<br>" .
                           "<strong>Message:</strong><br>" . nl2br(htmlspecialchars($message));
 
+            // Send the email
             $mail->send();
             $success = 'Message sent successfully!';
             $message = ''; // Clear the message after sending

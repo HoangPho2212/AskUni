@@ -1,15 +1,18 @@
 <?php
-session_start();
+session_start(); 
 require 'db.php';
 
+// Check if the user is logged in
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;
 }
 
+// handle optional GET filters for module and search
 $moduleFilter = $_GET['module'] ?? '';
 $search = $_GET['search'] ?? '';
 
+// Base query to fetch posts with user and module information
 $query = "
     SELECT posts.*, users.username, modules.name AS module_name
     FROM posts
@@ -20,25 +23,29 @@ $query = "
 
 $params = [];
 
+// Apply module filter if selected
 if (!empty($moduleFilter)) {
     $query .= " AND modules.name = :module";
     $params[':module'] = $moduleFilter;
 }
 
+// Apply search filter if keyword is type in
 if (!empty($search)) {
     $query .= " AND (posts.title LIKE :search OR posts.content LIKE :search)";
     $params[':search'] = '%' . $search . '%';
 }
 
+// Order set newest posts first
 $query .= " ORDER BY posts.created_at DESC";
 
+// Prepare and execute the query
 $stmt = $pdo->prepare($query);
 $stmt->execute($params);
 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Get the list of modules for the filter dropdown
 $modulestmt = $pdo->query("SELECT name FROM modules");
 $modules = $modulestmt->fetchAll(PDO::FETCH_COLUMN);
-
 
 ?>
 
