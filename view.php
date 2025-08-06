@@ -127,7 +127,7 @@ $comments = $comment_stmt->fetchAll();
             <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
 
             <?php if (!empty($post['image'])): ?>
-                <img src="<?= htmlspecialchars($post['image']) ?>" alt="A detailed description of the primary subject in the post image, including actions, surroundings, any visible text, and the emotional tone if apparent">
+                <img src="<?= htmlspecialchars($post['image']) ?>" alt="A screenshot of the post">
             <?php endif; ?>
 
         <?php else: ?>

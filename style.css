@@ -7,7 +7,7 @@
 
 body {
     width: 100vw;
-    min-height: 2000px;
+    min-height: 1000px;
     background:
         linear-gradient(45deg,
             #A78BFA,
@@ -691,4 +691,10 @@ footer .developer {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+.post-container img {
+    width: 100%;
+    max-width: 500px; /* Optional max */
+    height: auto;
 }
