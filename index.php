@@ -184,7 +184,8 @@ $modules = $modulestmt->fetchAll(PDO::FETCH_COLUMN);
                     <a href="contact.php">Contact Us</a> |
                     <a>About</a>
                 </p>
-                <p class="developer"> developed by <a style="text-decoration: none;" href="https://github.com/HoangPho2212">Hoang Pho</a>
+                <p class="developer"> developed by <i class="fa-brands fa-github"></i> <a style="text-decoration: none;" 
+                href="https://github.com/HoangPho2212">Hoang Pho</a>
                 </p>
             </div>
         </footer>

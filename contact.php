@@ -123,7 +123,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
     </div>
 
     <div style="max-height: 600px;" class="login-container">
-        <h2>Contact Admin</h2>
+        <h2>Contact Admin
+            <i class="fa-solid fa-envelope"></i>
+        </h2>
 
         <?php if ($success): ?>
             <p class="notice"> <?= htmlspecialchars($success) ?> </p>
