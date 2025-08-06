@@ -6,7 +6,6 @@
 }
 
 body {
-    display: flex;
     width: 100vw;
     min-height: 2000px;
     background:
@@ -686,4 +685,10 @@ footer p {
 footer .developer {
     font-size: 0.9rem;
     color: #6b7280;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
